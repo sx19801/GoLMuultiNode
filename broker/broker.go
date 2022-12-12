@@ -7,7 +7,6 @@ import (
 	"math/rand"
 	"net"
 	"net/rpc"
-	"strconv"
 	"time"
 )
 
@@ -28,13 +27,16 @@ type GameOfLifeOperations struct{}
 // func that makes a call to the Server; send segment and receive segment
 func callServer(world [][]byte, p stubs.Params) [][]byte {
 	Servers := make([]string, p.Threads)
-	for i := 0; i < p.Threads; i++ {
-		server := "127.0.0.1:80" + strconv.Itoa(31+i)
-		flag.Parse()
-		fmt.Println("Server: ", server)
-		Servers[i] = server
-	}
+	//for i := 0; i < p.Threads; i++ {
+	//server := "127.0.0.1:80" + strconv.Itoa(31+i)
+	flag.Parse()
+	//fmt.Println("Server: ", server)
+	Servers[0] = "54.90.170.226:8031"
+	Servers[1] = "54.83.181.254:8032"
 
+	//}
+	//ip for first node 54.90.170.226
+	//ip for second node 54.83.181.254
 	flag.Parse()
 	fmt.Println("Server: ", Servers[0])
 	//client, _ := rpc.Dial("tcp", server)
@@ -45,14 +47,19 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	segmentHeight := p.ImageHeight / p.Threads
 
 	//response := new(stubs.Response)
-
+	var err error
 	clients := make([]*rpc.Client, p.Threads)
 	for i := 0; i < p.Threads; i++ {
-		clients[i], _ = rpc.Dial("tcp", Servers[i])
-
+		fmt.Println("dialing worker ", i)
+		clients[i], err = rpc.Dial("tcp", Servers[i])
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println("dialled worker ", i)
 	}
-
+	fmt.Println("Successfully called clients")
 	for turn < p.Turns {
+		fmt.Println("got into the turn ", turn)
 		calls := make([]*rpc.Call, p.Threads)
 		responses := make([]*stubs.Response, p.Threads)
 		for i := 0; i < p.Threads; i++ {
@@ -74,6 +81,7 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 		}
 		var newWorld [][]byte
 		for i, call := range calls {
+			fmt.Println()
 			<-call.Done
 			//fmt.Println("SEGMENT ", i, "  ", responses[i].NewSegment)
 			newWorld = append(newWorld, responses[i].NewSegment...)

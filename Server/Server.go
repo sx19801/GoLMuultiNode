@@ -145,7 +145,7 @@ func main() {
 	flag.Parse()
 	rand.Seed(time.Now().UnixNano())
 	rpc.Register(&GameOfLifeOperations{})
-	listener, _ := net.Listen("tcp", "127.0.0.1:"+*pAddr)
+	listener, _ := net.Listen("tcp", ":"+*pAddr)
 	fmt.Println(*pAddr)
 	defer listener.Close()
 	rpc.Accept(listener)
