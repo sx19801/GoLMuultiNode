@@ -32,7 +32,7 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	flag.Parse()
 	//fmt.Println("Server: ", server)
 	Servers[0] = "54.90.170.226:8031"
-	Servers[1] = "54.83.181.254:8032"
+	Servers[1] = "34.235.88.12:8032"
 
 	//}
 	//ip for first node 54.90.170.226
@@ -50,7 +50,7 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	//response := new(stubs.Response)
 	clients := []*rpc.Client{}
 	for i := 0; i < p.Threads; i++ {
-		fmt.Println("dialing worker ", i)
+		fmt.Println("dialing worker ", Servers[i])
 		client, _ := rpc.Dial("tcp", Servers[i])
 		clients = append(clients, client)
 		fmt.Println("dialled worker ", i)
