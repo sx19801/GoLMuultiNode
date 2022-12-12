@@ -39,6 +39,7 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	//ip for second node 54.83.181.254
 	flag.Parse()
 	fmt.Println("Server: ", Servers[0])
+	fmt.Println("Server: ", Servers[1])
 	//client, _ := rpc.Dial("tcp", server)
 
 	turn = 0
@@ -47,14 +48,11 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	segmentHeight := p.ImageHeight / p.Threads
 
 	//response := new(stubs.Response)
-	var err error
-	clients := make([]*rpc.Client, p.Threads)
+	clients := []*rpc.Client{}
 	for i := 0; i < p.Threads; i++ {
 		fmt.Println("dialing worker ", i)
-		clients[i], err = rpc.Dial("tcp", Servers[i])
-		if err != nil {
-			fmt.Println(err)
-		}
+		client, _ := rpc.Dial("tcp", Servers[i])
+		clients = append(clients, client)
 		fmt.Println("dialled worker ", i)
 	}
 	fmt.Println("Successfully called clients")
