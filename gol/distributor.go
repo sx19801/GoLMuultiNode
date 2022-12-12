@@ -149,7 +149,7 @@ func distributor(p Params, c distributorChannels, key <-chan rune) {
 	//running := true
 	// ticker := time.NewTicker(2 * time.Second)
 	//rpc call shit
-	server := "18.215.177.59:8030"
+	server := "127.0.0.1:8030"
 	flag.Parse()
 	fmt.Println("Server: ", server)
 	client, _ := rpc.Dial("tcp", server)
