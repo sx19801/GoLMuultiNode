@@ -31,8 +31,8 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	//server := "127.0.0.1:80" + strconv.Itoa(31+i)
 	flag.Parse()
 	//fmt.Println("Server: ", server)
-	Servers[0] = "34.235.88.12:8031"
-	Servers[1] = "54.90.170.226:8032"
+	Servers[0] = "34.235.88.12:8032"
+	Servers[1] = "54.90.170.226:8031"
 
 	//}
 	//ip for first node 54.90.170.226
