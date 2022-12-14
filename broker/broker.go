@@ -31,9 +31,9 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 	//server := "127.0.0.1:80" + strconv.Itoa(31+i)
 	flag.Parse()
 	//fmt.Println("Server: ", server)
-	Servers[0] = "34.227.206.181:8031"
-	Servers[1] = "35.175.219.166:8031"
-	Servers[2] = "34.207.206.63:8031"
+	Servers[0] = "18.212.221.53:8031"
+	Servers[1] = "54.237.199.111:8031"
+	Servers[2] = "54.226.195.63:8031"
 
 	//}
 	//ip for first node 54.90.170.226
@@ -94,46 +94,6 @@ func callServer(world [][]byte, p stubs.Params) [][]byte {
 		turn++
 	}
 
-	// for turn < p.Turns {
-	// 	for i := 0; i < p.Threads; i++ {
-	// 		if i == p.Threads-1 {
-	// 			fmt.Println(Servers[i])
-	// 			client, _ := rpc.Dial("tcp", Servers[i])
-	// 			fmt.Println("after dial")
-	// 			//getting the segment to send
-	// 			request := stubs.Request{World: world, Segment: segment, SegStart: segmentHeight * i, SegEnd: p.ImageHeight, P: stubs.Params{ImageHeight: p.ImageHeight, ImageWidth: p.ImageWidth, Threads: p.Threads, Turns: p.Turns}}
-	// 			//fmt.Println("before client.go")
-	// 			call := client.Go(stubs.GolHandler, request, response, nil)
-	// 			fmt.Println("after call")
-	// 			//fmt.Println("after client.go")
-	// 			select {
-	// 			case <-call.Done:
-	// 				//fmt.Println(response.NewSegment)
-	// 				newWorld = append(newWorld, response.NewSegment...)
-	// 				world = newWorld
-	// 				turn++
-	// 			}
-	// 		} else {
-	// 			fmt.Println(Servers[i])
-	// 			client, _ := rpc.Dial("tcp", Servers[i])
-	// 			fmt.Println("after dial")
-	// 			request := stubs.Request{World: world, Segment: segment, SegStart: segmentHeight * i, SegEnd: segmentHeight*i + 1, P: stubs.Params{ImageHeight: p.ImageHeight, ImageWidth: p.ImageWidth, Threads: p.Threads, Turns: p.Turns}}
-	// 			//fmt.Println("before client.go")
-	// 			call := client.Go(stubs.GolHandler, request, response, nil)
-	// 			fmt.Println("after call")
-	// 			//fmt.Println("after client.go")
-	// 			select {
-	// 			case <-call.Done:
-	// 				//fmt.Println(response.NewSegment)
-	// 				newWorld = append(newWorld, response.NewSegment...)
-	// 				world = newWorld
-	// 				turn++
-	// 			}
-	// 		}
-	// 		// defer client.Close()
-	// 	}
-	// }
-	//fmt.Println(len(world))
 	return world
 }
 
